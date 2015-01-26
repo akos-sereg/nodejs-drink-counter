@@ -5,4 +5,4 @@ function getParameterByName(name) {
     return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-var mainController = new MainScreenController("venueList");
+var venueController = new VenueController("venueList", "venueName", "venueAddress");
