@@ -3,6 +3,7 @@ var path       = require('path');
 var app        = express();
 var bodyParser = require('body-parser');
 var Drink      = require('./app/models/drink');
+var Venue      = require('./app/models/venue');
 
 var mongoose   = require('mongoose');
 mongoose.connect('mongodb://akoss:dreher@127.0.0.1:27017/mydb'); // connect to our database
@@ -26,6 +27,9 @@ router.get('/', function(req, res) {
     res.json({ message: 'You can find the API at /api' });
 });
 
+// -------------------------------------------
+// Register routes for Drinks handling
+// -------------------------------------------
 router.route('/drinks')
 
     .post(function(req, res) {
@@ -85,6 +89,67 @@ router.route('/drinks/:drink_id')
                         res.send(err);
 
                     res.json({ message: 'Drink updated!' });
+                });
+
+            });
+        });
+
+// -------------------------------------------
+// Register routes for Venue handling
+// -------------------------------------------
+router.route('/venues')
+
+    .post(function(req, res) {
+
+        var venue = new Venue();
+        venue.name = req.body.name;
+        venue.address = req.body.address;
+
+        venue.save(function(err) {
+             if (err) {
+                res.send(err);
+            }
+
+            res.json({ message: 'Venue created!' });
+        });
+
+    })
+
+    .get(function(req, res) {
+            Venue.find(function(err, venues) {
+                if (err)
+                    res.send(err);
+
+                res.json(venues);
+            });
+        });
+
+router.route('/venues/:venue_id')
+
+    .get(function(req, res) {
+        Venue.findById(req.params.venue_id, function(err, venue) {
+            if (err)
+                res.send(err);
+            res.json(venue);
+        });
+    })
+
+    .put(function(req, res) {
+
+            Venue.findById(req.params.venue_id, function(err, venue) {
+
+                if (err) {
+                    res.send(err);
+                }
+
+                venue.name = req.body.name;
+                venue.address = req.body.address;
+
+                venue.save(function(err) {
+                    if (err)
+                        res.send(err);
+
+                    res.json({ message: 'Venue updated!' });
                 });
 
             });
