@@ -33,6 +33,7 @@ router.route('/drinks')
         drink.place = req.body.place;
         drink.priceAtPlace = req.body.priceAtPlace;
         drink.pricePaid = req.body.pricePaid;
+        drink.insertedAt = req.body.insertedAt;
 
         drink.save(function(err) {
              if (err) {
@@ -75,6 +76,7 @@ router.route('/drinks/:drink_id')
                 drink.place = req.body.place;
                 drink.priceAtPlace = req.body.priceAtPlace;
                 drink.pricePaid = req.body.pricePaid;
+                drink.insertedAt = req.body.insertedAt;
 
                 drink.save(function(err) {
                     if (err)
