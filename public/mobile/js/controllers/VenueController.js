@@ -1,8 +1,14 @@
-function VenueController(ctrlVenueList, ctrlVenueName, ctrlVenueAddress) {
+function VenueController(ctrlVenueList, ctrlVenueName, ctrlVenueAddress, popupVenueAdded) {
     this.controls = [];
+    this.popups = [];
+
+    // Labels used by this component
     this.controls["venueList"] = ctrlVenueList;
     this.controls["venueName"] = ctrlVenueName;
     this.controls["venueAddress"] = ctrlVenueAddress;
+
+    // Popup screens used by this component
+    this.popups["venueAddedPopup"] = popupVenueAdded;
 }
 
 // -----------------------------------------------------------------------------
@@ -19,6 +25,18 @@ VenueController.prototype.loadVenueList = function() {
         controller.setVenueList(data);
     }).fail(function(jqXHR, textStatus) {
     });
+};
+
+// Save Venue on server
+VenueController.prototype.saveVenue = function(name, address) {
+    var controller = this;
+    $.post('/api/venues', $('#addVenueForm').serialize())
+        .done(function( data ) {
+
+            if (data.isSuccessful == true) {
+                $('#' + controller.popups["venueAddedPopup"]).popup('open');
+            }
+        });
 };
 
 // -----------------------------------------------------------------------------

@@ -40,19 +40,20 @@
 				<h1>Add Venue</h1>
 			</div>
 			<div data-role="content" data-theme="a">
-				<div data-demo-html="true">
-					
-					<div data-role="fieldcontain">
-						<label for="venueName">Name:</label>
-						<input type="text" name="venueName" id="venueName" value="" />
-					</div>
+				<form id="addVenueForm" name="addVenueForm">
+					<div data-demo-html="true">
 
-					<div data-role="fieldcontain">
-						<label for="venueAddress">Name:</label>
-						<input type="text" name="venueAddress" id="venueAddress" value="" />
-					</div>
+						<div data-role="fieldcontain">
+							<label for="name">Name:</label>
+							<input type="text" name="name" id="name" value="" />
+						</div>
 
-				</div>
+						<div data-role="fieldcontain">
+							<label for="address">Address:</label>
+							<input type="text" name="address" id="address" value="" />
+						</div>
+					</div>
+				</form>
 				
 				<input id="saveVenueButton" type="button" onClick="venueController.saveVenue($('#venueName').val(), $('#venueAddress').val())" value="Save" />
 				<br/><br/>
@@ -63,19 +64,16 @@
 			<!-- *************************************************** -->
 			<!-- Event Edited POPUP                                  -->
 			<!-- *************************************************** -->
-			<!--<div data-role="popup" id="eventEditedPopup" data-back-btn-text="" data-add-back-btn="false" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
+			<div data-role="popup" id="venueAddedPopup" data-back-btn-text="" data-add-back-btn="false" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
 				<div data-role="header" data-theme="a" class="ui-corner-top">
-					<h1 id="eventEditedPopup_header">Event Saved</h1>
+					<h1>Venue Saved</h1>
 				</div>
 				<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-					<h3 class="ui-title" id="eventEditedPopup_title">Event Saved successfully</h3>
-					<p id="eventEditedPopup_message">Click OK button to close this window.</p>
+					<h3 class="ui-title">Venue has been saved successfully</h3>
+					<p>Click OK button to close this window.</p>
 					<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">OK</a>    
 				</div>
 			</div>
-			
-		</div>-->
-		
-		
+		</div>
 	</body>
 </html>

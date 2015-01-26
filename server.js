@@ -110,7 +110,7 @@ router.route('/venues')
                 res.send(err);
             }
 
-            res.json({ message: 'Venue created!' });
+            res.json( { message: 'Venue created!', isSuccessful: true } );
         });
 
     })
