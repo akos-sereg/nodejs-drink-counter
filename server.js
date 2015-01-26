@@ -1,13 +1,15 @@
 var express    = require('express');
+var path       = require('path');
 var app        = express();
 var bodyParser = require('body-parser');
-var Drink       = require('./app/models/drink');
+var Drink      = require('./app/models/drink');
 
 var mongoose   = require('mongoose');
 mongoose.connect('mongodb://akoss:dreher@127.0.0.1:27017/mydb'); // connect to our database
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 var port = process.env.PORT || 3000;        // set our port
 
