@@ -1,9 +1,10 @@
-var express    = require('express');
-var path       = require('path');
-var app        = express();
-var bodyParser = require('body-parser');
-var Drink      = require('./app/models/drink');
-var Venue      = require('./app/models/venue');
+var express     = require('express');
+var path        = require('path');
+var app         = express();
+var bodyParser  = require('body-parser');
+var Drink       = require('./app/models/drink');
+var Venue       = require('./app/models/venue');
+var Consumption = require('./app/models/consumption');
 
 var mongoose   = require('mongoose');
 mongoose.connect('mongodb://akoss:dreher@127.0.0.1:27017/mydb'); // connect to our database
@@ -146,6 +147,74 @@ router.route('/venues/:venue_id')
                         res.send(err);
 
                     res.json({ message: 'Venue updated!' });
+                });
+
+            });
+        });
+
+
+// -------------------------------------------
+// Register routes for Consumption handling
+// -------------------------------------------
+router.route('/consumptions')
+
+    .post(function(req, res) {
+
+        var consumption = new Consumption();
+        consumption.user = req.body.user;
+        consumption.drinkName = req.body.drinkName;
+        consumption.venueName = req.body.venueName;
+        consumption.price = req.body.price;
+        consumption.insertedAt = req.body.insertedAt;
+
+        consumption.save(function(err) {
+             if (err) {
+                res.send(err);
+            }
+
+            res.json( { message: 'Consumption created!', isSuccessful: true } );
+        });
+
+    })
+
+    .get(function(req, res) {
+            Consumption.find(function(err, consumptions) {
+                if (err)
+                    res.send(err);
+
+                res.json(consumptions);
+            });
+        });
+
+router.route('/consumptions/:consumption_id')
+
+    .get(function(req, res) {
+        Consumption.findById(req.params.consumption_id, function(err, consumption) {
+            if (err)
+                res.send(err);
+            res.json(consumption);
+        });
+    })
+
+    .put(function(req, res) {
+
+            Consumption.findById(req.params.consumption_id, function(err, consumption) {
+
+                if (err) {
+                    res.send(err);
+                }
+
+                consumption.user = req.body.user;
+                consumption.drinkName = req.body.drinkName;
+                consumption.venueName = req.body.venueName;
+                consumption.price = req.body.price;
+                consumption.insertedAt = req.body.insertedAt;
+
+                consumption.save(function(err) {
+                    if (err)
+                        res.send(err);
+
+                    res.json({ message: 'Consumption updated!' });
                 });
 
             });
