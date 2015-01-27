@@ -1,4 +1,4 @@
-function VenueController(ctrlVenueList, ctrlVenueName, ctrlVenueAddress, popupVenueAdded) {
+function VenueController(ctrlVenueList, ctrlVenueName, ctrlVenueAddress, popupVenueAdded, ctrlSelectedVenueName) {
     this.controls = [];
     this.popups = [];
 
@@ -6,6 +6,7 @@ function VenueController(ctrlVenueList, ctrlVenueName, ctrlVenueAddress, popupVe
     this.controls["venueList"] = ctrlVenueList;
     this.controls["venueName"] = ctrlVenueName;
     this.controls["venueAddress"] = ctrlVenueAddress;
+    this.controls["selectedVenueName"] = ctrlSelectedVenueName;
 
     // Popup screens used by this component
     this.popups["venueAddedPopup"] = popupVenueAdded;
@@ -24,6 +25,7 @@ VenueController.prototype.loadVenueList = function() {
     }).done(function(data) {
         controller.setVenueList(data);
     }).fail(function(jqXHR, textStatus) {
+
     });
 };
 
@@ -40,7 +42,7 @@ VenueController.prototype.saveVenue = function(name, address) {
 };
 
 // -----------------------------------------------------------------------------
-// Screen Refreshing methods
+// Screen related methods
 // -----------------------------------------------------------------------------
 
 // Populates Venue list on UI
@@ -51,7 +53,8 @@ VenueController.prototype.setVenueList = function(data) {
     if (data != null) {
         for (var i=0; i!=data.length; i++)
         {
-            html += '<li>' + data[i].name + ' - ' + data[i].address + '</li>';
+            html += '<li><a href="#listConsumption" onClick="venueController.venueSelected(\'' + data[i].name + '\');">'
+                + data[i].name + ' - ' + data[i].address + '</a></li>';
         }
     }
 
@@ -65,4 +68,11 @@ VenueController.prototype.resetScreen = function() {
 
     $('#'+this.controls["venueName"]).val('');
     $('#'+this.controls["venueAddress"]).val('');
+};
+
+// When user picks a venue from list
+VenueController.prototype.venueSelected = function(name) {
+
+    $('#'+this.controls["selectedVenueName"]).html(name);
+
 };

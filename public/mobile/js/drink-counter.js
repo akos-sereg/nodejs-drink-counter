@@ -5,4 +5,5 @@ function getParameterByName(name) {
     return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-var venueController = new VenueController("venueList", "venueName", "venueAddress", "venueAddedPopup");
+var venueController = new VenueController("venueList", "venueName", "venueAddress", "venueAddedPopup", "selectedVenueName");
+var drinkController = new DrinkController();
