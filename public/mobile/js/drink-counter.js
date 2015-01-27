@@ -6,4 +6,4 @@ function getParameterByName(name) {
 }
 
 var venueController = new VenueController("venueList", "venueName", "venueAddress", "venueAddedPopup", "selectedVenueName");
-var drinkController = new DrinkController();
+var drinkController = new DrinkController("addDrinkPopup", "drinkList");

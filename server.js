@@ -36,9 +36,7 @@ router.route('/drinks')
 
         var drink = new Drink();
         drink.name = req.body.name;
-        drink.place = req.body.place;
-        drink.priceAtPlace = req.body.priceAtPlace;
-        drink.pricePaid = req.body.pricePaid;
+        drink.type = req.body.type;
         drink.insertedAt = req.body.insertedAt;
 
         drink.save(function(err) {
@@ -79,9 +77,7 @@ router.route('/drinks/:drink_id')
                 }
 
                 drink.name = req.body.name;
-                drink.place = req.body.place;
-                drink.priceAtPlace = req.body.priceAtPlace;
-                drink.pricePaid = req.body.pricePaid;
+                drink.type = req.body.type;
                 drink.insertedAt = req.body.insertedAt;
 
                 drink.save(function(err) {

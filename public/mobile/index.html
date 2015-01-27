@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -6,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Drink Counter</title>
 
+		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="http://demos.jquerymobile.com/1.3.2/css/themes/default/jquery.mobile-1.3.2.min.css" />
 		<!--<link rel="stylesheet" href="css/themes/green-design.min.css" />-->
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile.structure-1.3.2.min.css" />
@@ -88,7 +88,47 @@
 				<h1>Consumption</h1>
 			</div>
 			<div data-role="content" data-theme="a">
-				Consumption in the last 24 hours here: <b><span id="selectedVenueName"></span></b>
+				Consumption in the last 24 hours here: <br/>
+				<b><span id="selectedVenueName"></span></b>
+
+				<a href="#" data-role="button" data-icon="plus" data-theme="a" onClick="drinkController.showAddDrinkPopup()">Add Drink</a>
+
+				<table width="100%">
+					<tr>
+						<td valign="center">
+							<span class="drinkCount">6</span>
+							<span class="drinkName">Dreher</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div data-role="controlgroup" data-type="horizontal" data-mini="true">
+								<a href="#" data-role="button" data-icon="plus" data-theme="b">Increment</a>
+								<a href="#" data-role="button" data-icon="delete" data-theme="b">Decrement</a>
+								<a href="#" data-role="button" data-icon="grid" data-theme="b">More</a>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<!-- *************************************************** -->
+			<!-- Add Drink POPUP                                     -->
+			<!-- *************************************************** -->
+			<div data-role="popup" id="addDrinkPopup" data-overlay-theme="a" data-theme="c" style="max-width: 400px; width: 320px;" class="ui-corner-all">
+				<div data-role="header" data-theme="a" class="ui-corner-top">
+					<h1>Add Drink</h1>
+				</div>
+				<div data-role="content" data-theme="a" class="ui-corner-bottom ui-content">
+					<h3 class="ui-title">Drink to be added</h3>
+
+					<form>
+						<fieldset id="drinkList" data-role="controlgroup"></fieldset>
+					</form>
+
+					<a href="#" data-role="button" data-inline="true" data-theme="a">OK</a>
+					<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="a">Cancel</a>
+				</div>
 			</div>
 		</div>
 
