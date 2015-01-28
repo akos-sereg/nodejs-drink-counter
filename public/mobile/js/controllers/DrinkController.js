@@ -7,6 +7,8 @@ function DrinkController(popupName, ctrlDrinkList) {
 
     // Popup screens used by this component
     this.popups["addDrinkPopup"] = popupName;
+
+    this.drinks = [];
 }
 
 // -----------------------------------------------------------------------------
@@ -23,6 +25,8 @@ DrinkController.prototype.loadDrinkList = function() {
         url : "/api/drinks"
     }).done(function(data) {
 
+        controller.drinks = data;
+
         for (var i=0; i!=data.length; i++) {
             controller.addDrink(data[i], i+1);
         }
@@ -36,8 +40,17 @@ DrinkController.prototype.loadDrinkList = function() {
 // UI
 // -----------------------------------------------------------------------------
 
-DrinkController.prototype.getSelectedDrinkName = function() {
-    return $('input[name=drink-choice]:checked', '#drinkSelection').val();
+DrinkController.prototype.getSelectedDrink = function() {
+
+    var selectedDrinkId =  $('input[name=drink-choice]:checked', '#drinkSelection').val();
+
+    for (var i=0; i!=this.drinks.length; i++) {
+        if (this.drinks[i]._id == selectedDrinkId) {
+            return this.drinks[i];
+        }
+    }
+
+    return null;
 };
 
 // Remove drinks from drink list list
@@ -48,7 +61,7 @@ DrinkController.prototype.removeDrinks = function() {
 // Add Drink to drink list (model: drink.js)
 DrinkController.prototype.addDrink = function(drink, index) {
     $('#' + this.controls["drinkList"]).append(
-          '<input type="radio" name="drink-choice" id="radio-choice-'+index+'" value="'+drink.name+'" '+(index == 0 ? 'checked="checked"' : '')+'>'
+          '<input type="radio" name="drink-choice" id="radio-choice-'+index+'" value="'+drink._id+'" '+(index == 0 ? 'checked="checked"' : '')+'>'
         + '<label for="radio-choice-'+index+'">'+drink.name+' - '+ drink.type +'</label>');
 
     $("input[type='radio']").checkboxradio().checkboxradio("refresh");

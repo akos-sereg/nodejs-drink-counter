@@ -9,13 +9,14 @@ function ConsumptionController(consumptionList) {
 // AJAX Calls
 // -----------------------------------------------------------------------------
 
-ConsumptionController.prototype.saveConsumption = function(user, drinkName, venueName, price) {
+ConsumptionController.prototype.saveConsumption = function(user, drink, venueName, price) {
 
     var _drinkController = drinkController;
     var _consumptionController = this;
 
     var postData = "user=" + user
-        + "&drinkName=" + drinkName
+        + "&drinkName=" + drink.name
+        + "&drinkType=" + drink.type
         + "&venueName=" + venueName
         + "&price="+price
         + "&insertedAt="+new Date();
@@ -38,9 +39,22 @@ ConsumptionController.prototype.refreshConsumptionList = function() {
 
         controller.removeAll();
 
+        // Aggregate consumption items
+        var aggregatedConsumption = [];
         for (var i=0; i!=data.length; i++) {
-            data[i].drinkCount = 2;
-            controller.addConsumption(data[i]);
+
+            if (aggregatedConsumption[data[i].drinkType] == undefined) {
+                aggregatedConsumption[data[i].drinkType] = data[i];
+                aggregatedConsumption[data[i].drinkType].drinkCount = 1;
+            }
+            else {
+                aggregatedConsumption[data[i].drinkType].drinkCount++;
+            }
+        }
+
+        // Display consumption items
+        for (var key in aggregatedConsumption) {
+            controller.addConsumption(aggregatedConsumption[key]);
         }
 
     }).fail(function(jqXHR, textStatus) {
