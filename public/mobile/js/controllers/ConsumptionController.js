@@ -76,7 +76,7 @@ ConsumptionController.prototype.addConsumption = function(aggregatedConsumption)
 		+'			<tr>'
 		+'				<td valign="center">'
 		+'					<span class="drinkCount">'+aggregatedConsumption.drinkCount+'</span>'
-		+'					<span class="drinkName">'+aggregatedConsumption.drinkName+'</span>'
+		+'					<span class="drinkType">'+aggregatedConsumption.drinkType+'</span>'
 		+'				</td>'
 		+'			</tr>'
 		+'			<tr>'

@@ -244,6 +244,31 @@ router.route('/consumptions/last24hours/:user/:venueName')
             });
         });
 
+// Decrement (remove last inserted consumption item)
+router.route('/consumptions/remove-last/:user/:venueName/:drinkType')
+
+    .get(function(req, res) {
+
+            // Get recently inserted consumption item (drink type) at venue for user
+            var query = Consumption.find({
+                                     user: req.params.user,
+                                     venueName: req.params.venueName,
+                                     drinkType: req.params.drinkType
+                                })
+                                .sort( {'insertedAt': -1}).limit(1);
+            query.exec(function(err, consumptions) {
+                if (consumptions.length == 1) {
+
+                    // Remove this one
+                    Consumption.remove( { _id: consumptions[0]._id } ).exec();
+                    res.json( { message: 'Removed successfully' } );
+                }
+                else {
+                    res.json( { message: 'Not found' } );
+                }
+            });
+        });
+
 app.use('/api', router);
 
 // START THE SERVER
