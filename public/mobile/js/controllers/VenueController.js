@@ -10,6 +10,8 @@ function VenueController(ctrlVenueList, ctrlVenueName, ctrlVenueAddress, popupVe
 
     // Popup screens used by this component
     this.popups["venueAddedPopup"] = popupVenueAdded;
+
+    this.selectedVenueName = null;
 }
 
 // -----------------------------------------------------------------------------
@@ -25,7 +27,6 @@ VenueController.prototype.loadVenueList = function() {
     }).done(function(data) {
         controller.setVenueList(data);
     }).fail(function(jqXHR, textStatus) {
-
     });
 };
 
@@ -40,6 +41,14 @@ VenueController.prototype.saveVenue = function(name, address) {
             }
         });
 };
+
+// -----------------------------------------------------------------------------
+// Controller State
+// -----------------------------------------------------------------------------
+
+VenueController.prototype.getSelectedVenueName = function() {
+    return this.selectedVenueName;
+}
 
 // -----------------------------------------------------------------------------
 // Screen related methods
@@ -73,6 +82,7 @@ VenueController.prototype.resetScreen = function() {
 // When user picks a venue from list
 VenueController.prototype.venueSelected = function(name) {
 
+    this.selectedVenueName = name;
     $('#'+this.controls["selectedVenueName"]).html(name);
 
 };

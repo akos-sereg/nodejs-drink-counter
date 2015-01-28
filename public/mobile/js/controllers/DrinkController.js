@@ -36,6 +36,10 @@ DrinkController.prototype.loadDrinkList = function() {
 // UI
 // -----------------------------------------------------------------------------
 
+DrinkController.prototype.getSelectedDrinkName = function() {
+    return $('input[name=drink-choice]:checked', '#drinkSelection').val();
+};
+
 // Remove drinks from drink list list
 DrinkController.prototype.removeDrinks = function() {
     $('#' + this.controls["drinkList"]).html('');
@@ -44,7 +48,7 @@ DrinkController.prototype.removeDrinks = function() {
 // Add Drink to drink list (model: drink.js)
 DrinkController.prototype.addDrink = function(drink, index) {
     $('#' + this.controls["drinkList"]).append(
-          '<input type="radio" name="drink-choice" id="radio-choice-'+index+'" value="choice-'+index+'" '+(index == 0 ? 'checked="checked"' : '')+'>'
+          '<input type="radio" name="drink-choice" id="radio-choice-'+index+'" value="'+drink.name+'" '+(index == 0 ? 'checked="checked"' : '')+'>'
         + '<label for="radio-choice-'+index+'">'+drink.name+'</label>');
 
     $("input[type='radio']").checkboxradio().checkboxradio("refresh");
@@ -54,4 +58,10 @@ DrinkController.prototype.addDrink = function(drink, index) {
 DrinkController.prototype.showAddDrinkPopup = function() {
     $('#' + this.popups["addDrinkPopup"]).popup('open');
     this.loadDrinkList();
+};
+
+// Hide drink selector popup
+DrinkController.prototype.hideAddDrinkPopup = function() {
+    this.removeDrinks();
+    $('#' + this.popups["addDrinkPopup"]).popup('close');
 };
