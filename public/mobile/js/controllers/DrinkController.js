@@ -9,6 +9,9 @@ function DrinkController(popupName, ctrlDrinkList) {
     this.popups["addDrinkPopup"] = popupName;
 
     this.drinks = [];
+
+    // Initialize
+    this.loadDrinkList();
 }
 
 // -----------------------------------------------------------------------------
@@ -40,17 +43,34 @@ DrinkController.prototype.loadDrinkList = function() {
 // UI
 // -----------------------------------------------------------------------------
 
-DrinkController.prototype.getSelectedDrink = function() {
 
-    var selectedDrinkId =  $('input[name=drink-choice]:checked', '#drinkSelection').val();
+DrinkController.prototype.getDrinkById = function(drinkId) {
 
     for (var i=0; i!=this.drinks.length; i++) {
-        if (this.drinks[i]._id == selectedDrinkId) {
+        if (this.drinks[i]._id == drinkId) {
             return this.drinks[i];
         }
     }
 
     return null;
+}
+
+DrinkController.prototype.getDrinkByType = function(type) {
+
+    for (var i=0; i!=this.drinks.length; i++) {
+        if (this.drinks[i].type == type) {
+            return this.drinks[i];
+        }
+    }
+
+    return null;
+}
+
+DrinkController.prototype.getSelectedDrink = function() {
+
+    var selectedDrinkId =  $('input[name=drink-choice]:checked', '#drinkSelection').val();
+    return this.getDrinkById(selectedDrinkId);
+
 };
 
 // Remove drinks from drink list list

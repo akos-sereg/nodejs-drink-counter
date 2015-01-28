@@ -9,6 +9,7 @@ function ConsumptionController(consumptionList) {
 // AJAX Calls
 // -----------------------------------------------------------------------------
 
+// Increment consumption items
 ConsumptionController.prototype.saveConsumption = function(user, drink, venueName, price) {
 
     var _drinkController = drinkController;
@@ -26,6 +27,22 @@ ConsumptionController.prototype.saveConsumption = function(user, drink, venueNam
             _drinkController.hideAddDrinkPopup();
             _consumptionController.refreshConsumptionList();
         });
+}
+
+// Decrement consumption items
+ConsumptionController.prototype.decrementConsumption = function(user, drink, venueName) {
+
+    var controller = this;
+
+    $.ajax({
+        type : "GET",
+        url : "/api/consumptions/remove-last/akoss/" + venueName + "/" + drink.type
+    }).done(function(data) {
+
+        controller.refreshConsumptionList();
+
+    }).fail(function(jqXHR, textStatus) {
+    });
 }
 
 ConsumptionController.prototype.refreshConsumptionList = function() {
@@ -82,8 +99,8 @@ ConsumptionController.prototype.addConsumption = function(aggregatedConsumption)
 		+'			<tr>'
 		+'				<td>'
 		+'					<div class="manageConsumptionButtons" data-role="controlgroup" data-type="horizontal" data-mini="true">'
-		+'						<a href="#" data-role="button" data-icon="plus" data-theme="b">Increment</a>'
-		+'						<a href="#" data-role="button" data-icon="delete" data-theme="b">Decrement</a>'
+		+'						<a href="#" data-role="button" data-icon="plus" data-theme="b" onClick="consumptionController.saveConsumption(\'akoss\', drinkController.getDrinkByType(\''+aggregatedConsumption.drinkType+'\'), venueController.getSelectedVenueName(), 0)">Increment</a>'
+		+'						<a href="#" data-role="button" data-icon="delete" data-theme="b" onClick="consumptionController.decrementConsumption(\'akoss\', drinkController.getDrinkByType(\''+aggregatedConsumption.drinkType+'\'), venueController.getSelectedVenueName())">Decrement</a>'
 		+'						<a href="#" data-role="button" data-icon="grid" data-theme="b">More</a>'
 		+'					</div>'
 		+'				</td>'
