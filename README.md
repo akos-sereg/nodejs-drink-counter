@@ -30,7 +30,9 @@ nodejs-drink-counter$ node server.js
 # Screenshots
 
 Main screen
+
 ![Main Screen](https://raw.githubusercontent.com/akos-sereg/nodejs-drink-counter/master/docs/screenshot-0.png "Screenshot")
 
 After pub selection, track your consumption ...
+
 ![Main Screen](https://raw.githubusercontent.com/akos-sereg/nodejs-drink-counter/master/docs/screenshot-1.png "Screenshot")
