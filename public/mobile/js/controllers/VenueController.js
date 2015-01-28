@@ -84,5 +84,6 @@ VenueController.prototype.venueSelected = function(name) {
 
     this.selectedVenueName = name;
     $('#'+this.controls["selectedVenueName"]).html(name);
+    consumptionController.refreshConsumptionList();
 
 };

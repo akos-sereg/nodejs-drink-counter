@@ -7,4 +7,4 @@ function getParameterByName(name) {
 
 var venueController = new VenueController("venueList", "venueName", "venueAddress", "venueAddedPopup", "selectedVenueName");
 var drinkController = new DrinkController("addDrinkPopup", "drinkList");
-var consumptionController = new ConsumptionController();
+var consumptionController = new ConsumptionController("consumptionList");
