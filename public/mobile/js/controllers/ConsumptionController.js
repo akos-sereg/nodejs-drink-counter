@@ -28,10 +28,12 @@ ConsumptionController.prototype.saveConsumption = function(user, drinkName, venu
 }
 
 ConsumptionController.prototype.refreshConsumptionList = function() {
+
     var controller = this;
+
     $.ajax({
         type : "GET",
-        url : "/api/consumptions"
+        url : "/api/consumptions/last24hours/akoss/" + venueController.getSelectedVenueName()
     }).done(function(data) {
 
         controller.removeAll();

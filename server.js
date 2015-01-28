@@ -220,6 +220,28 @@ router.route('/consumptions/:consumption_id')
             });
         });
 
+// Get last 24 hours consumptions for user at venue
+router.route('/consumptions/last24hours/:user/:venueName')
+
+    .get(function(req, res) {
+
+            var yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+
+            Consumption.find({
+                    user: req.params.user,
+                    venueName: req.params.venueName,
+                    insertedAt: { '$gte': yesterday }
+            },
+            function(err, consumptions) {
+                if (err) {
+                    res.send(err);
+                }
+
+                res.json(consumptions);
+            });
+        });
+
 app.use('/api', router);
 
 // START THE SERVER
