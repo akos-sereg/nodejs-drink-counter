@@ -4,6 +4,7 @@ var Schema       = mongoose.Schema;
 var ConsumptionSchema   = new Schema({
     user: String,
     drinkName: String,
+    drinkType: String,
     venueName: String,
     price: Number,
     insertedAt: Date          // format: "01.02.2012" for Jan 02, 2012

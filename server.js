@@ -163,6 +163,7 @@ router.route('/consumptions')
         var consumption = new Consumption();
         consumption.user = req.body.user;
         consumption.drinkName = req.body.drinkName;
+        consumption.drinkType = req.body.drinkType;
         consumption.venueName = req.body.venueName;
         consumption.price = req.body.price;
         consumption.insertedAt = req.body.insertedAt;
@@ -206,6 +207,7 @@ router.route('/consumptions/:consumption_id')
 
                 consumption.user = req.body.user;
                 consumption.drinkName = req.body.drinkName;
+                consumption.drinkType = req.body.drinkType;
                 consumption.venueName = req.body.venueName;
                 consumption.price = req.body.price;
                 consumption.insertedAt = req.body.insertedAt;

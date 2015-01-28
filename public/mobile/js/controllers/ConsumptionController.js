@@ -18,7 +18,7 @@ ConsumptionController.prototype.saveConsumption = function(user, drinkName, venu
         + "&drinkName=" + drinkName
         + "&venueName=" + venueName
         + "&price="+price
-        + "&insertedAt=01.01.2014";
+        + "&insertedAt="+new Date();
 
     $.post('/api/consumptions', postData)
          .done(function( data ) {

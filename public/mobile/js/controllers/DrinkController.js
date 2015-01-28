@@ -49,7 +49,7 @@ DrinkController.prototype.removeDrinks = function() {
 DrinkController.prototype.addDrink = function(drink, index) {
     $('#' + this.controls["drinkList"]).append(
           '<input type="radio" name="drink-choice" id="radio-choice-'+index+'" value="'+drink.name+'" '+(index == 0 ? 'checked="checked"' : '')+'>'
-        + '<label for="radio-choice-'+index+'">'+drink.name+'</label>');
+        + '<label for="radio-choice-'+index+'">'+drink.name+' - '+ drink.type +'</label>');
 
     $("input[type='radio']").checkboxradio().checkboxradio("refresh");
 };
