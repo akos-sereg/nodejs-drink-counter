@@ -48,10 +48,25 @@
 				<form id="addDrinkForm" name="addDrinkForm">
 					<div data-demo-html="true">
 
-						<div data-role="fieldcontain">
+						<!--<div data-role="fieldcontain">
 							<label for="name">Name:</label>
 							<input type="text" name="name" id="name" value="" />
-						</div>
+						</div>-->
+
+						<fieldset data-role="controlgroup">
+
+							<input type="radio" name="name" id="radio-choice-1" value="Beer" checked="checked" />
+							<label for="radio-choice-1">Beer</label>
+
+							<input type="radio" name="name" id="radio-choice-2" value="Wine"  />
+							<label for="radio-choice-2">Wine</label>
+
+							<input type="radio" name="name" id="radio-choice-3" value="Shot"  />
+							<label for="radio-choice-3">Shot</label>
+
+							<input type="radio" name="name" id="radio-choice-4" value="Other"  />
+							<label for="radio-choice-4">Other</label>
+						</fieldset>
 
 						<div data-role="fieldcontain">
 							<label for="type">Type:</label>
