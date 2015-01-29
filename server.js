@@ -113,7 +113,8 @@ router.route('/venues')
     })
 
     .get(function(req, res) {
-            Venue.find(function(err, venues) {
+
+            Venue.find({}, {}, {sort: { name: 1}}, function(err, venues) {
                 if (err)
                     res.send(err);
 
