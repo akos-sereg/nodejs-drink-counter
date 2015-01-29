@@ -1,8 +1,9 @@
-function ConsumptionController(consumptionList) {
+function ConsumptionController(consumptionList, noDrinkSelected) {
     this.controls = [];
     this.popups = [];
 
     this.controls["consumptionList"] = consumptionList;
+    this.popups["noDrinkSelected"] = noDrinkSelected;
 }
 
 // -----------------------------------------------------------------------------
@@ -14,6 +15,10 @@ ConsumptionController.prototype.saveConsumption = function(user, drink, venueNam
 
     var _drinkController = drinkController;
     var _consumptionController = this;
+
+    if (drink == null) {
+        return;
+    }
 
     var postData = "user=" + user
         + "&drinkName=" + drink.name

@@ -84,47 +84,31 @@
 		<!-- Drink Consumption Listing at Venue's page           -->
 		<!-- *************************************************** -->
 
-		<div data-role="page" id="listConsumption" data-theme="a" data-add-back-btn="true" data-back-btn-text="Back">
-			<div data-role="header" data-position="inline">
+		<div data-role="page" id="listConsumption" data-theme="a">
+			<div data-role="header" data-add-back-btn="true" data-back-btn-text="Back" data-position="inline">
 				<h1>Consumption</h1>
 			</div>
 			<div data-role="content" data-theme="a">
 				Consumption in the last 24 hours here: <br/>
 				<b><span id="selectedVenueName"></span></b>
 
-				<a href="#" data-role="button" data-icon="plus" data-theme="a" onClick="drinkController.showAddDrinkPopup()">Add Drink</a>
+				<br/>
+				<a href="#" data-role="button" data-inline="true" data-icon="home" data-rel="back" data-theme="a">Back</a>
+				<a href="#" data-role="button" data-inline="true" data-icon="plus" data-theme="a" onClick="drinkController.showAddDrinkPopup()">Add Drink</a>
 
-				<div id="consumptionList">
-
-				</div>
-				<!--
-				<table width="100%">
-					<tr>
-						<td valign="center">
-							<span class="drinkCount">6</span>
-							<span class="drinkName">Dreher</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div data-role="controlgroup" data-type="horizontal" data-mini="true">
-								<a href="#" data-role="button" data-icon="plus" data-theme="b">Increment</a>
-								<a href="#" data-role="button" data-icon="delete" data-theme="b">Decrement</a>
-								<a href="#" data-role="button" data-icon="grid" data-theme="b">More</a>
-							</div>
-						</td>
-					</tr>
-				</table>-->
+				<div id="consumptionList"></div>
 			</div>
 
 			<!-- *************************************************** -->
 			<!-- Add Drink POPUP                                     -->
 			<!-- *************************************************** -->
 			<div data-role="popup" id="addDrinkPopup" data-overlay-theme="a" data-theme="c" style="max-width: 400px; width: 320px;" class="ui-corner-all">
-				<div data-role="header" data-theme="a" class="ui-corner-top">
+				<div data-role="header" data-theme="a" data-add-back-btn="false"  class="ui-corner-top">
 					<h1>Add Drink</h1>
 				</div>
+
 				<div data-role="content" data-theme="a" class="ui-corner-bottom ui-content">
+					<a href="#" data-role="button" data-icon="plus" data-theme="a" onClick="">Not on the list</a>
 					<h3 class="ui-title">Drink to be added</h3>
 
 					<form id="drinkSelection" name="drinkSelection">
@@ -134,7 +118,11 @@
 					<a href="#" data-role="button" data-inline="true" data-theme="a" onClick="consumptionController.saveConsumption('akoss', drinkController.getSelectedDrink(), venueController.getSelectedVenueName(), 0)">OK</a>
 					<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="a">Cancel</a>
 				</div>
+
 			</div>
+
+
+
 		</div>
 
 	</body>
