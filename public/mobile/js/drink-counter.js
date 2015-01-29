@@ -19,6 +19,7 @@ Date.prototype.ddmmyyyy = function() {
    return (dd[1]?dd:"0"+dd[0]) + '.' + (mm[1]?mm:"0"+mm[0]) + '.' + yyyy;
 };
 
+var username = 'akoss';
 
 var venueController = new VenueController("venueList", "venueName", "venueAddress", "venueAddedPopup", "selectedVenueName");
 var drinkController = new DrinkController("addDrinkPopup", "drinkList", "drinkAddedPopup", "drinkExistsPopup");

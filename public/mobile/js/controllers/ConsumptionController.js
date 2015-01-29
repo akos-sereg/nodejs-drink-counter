@@ -11,7 +11,7 @@ function ConsumptionController(consumptionList, noDrinkSelected) {
 // -----------------------------------------------------------------------------
 
 // Increment consumption items
-ConsumptionController.prototype.saveConsumption = function(user, drink, venueName, price) {
+ConsumptionController.prototype.saveConsumption = function(drink, venueName, price) {
 
     var _drinkController = drinkController;
     var _consumptionController = this;
@@ -20,7 +20,7 @@ ConsumptionController.prototype.saveConsumption = function(user, drink, venueNam
         return;
     }
 
-    var postData = "user=" + user
+    var postData = "user=" + username
         + "&drinkName=" + drink.name
         + "&drinkType=" + drink.type
         + "&venueName=" + venueName
@@ -35,13 +35,13 @@ ConsumptionController.prototype.saveConsumption = function(user, drink, venueNam
 }
 
 // Decrement consumption items
-ConsumptionController.prototype.decrementConsumption = function(user, drink, venueName) {
+ConsumptionController.prototype.decrementConsumption = function(drink, venueName) {
 
     var controller = this;
 
     $.ajax({
         type : "GET",
-        url : "/api/consumptions/remove-last/akoss/" + venueName + "/" + drink.type
+        url : "/api/consumptions/remove-last/"+username+"/" + venueName + "/" + drink.type
     }).done(function(data) {
 
         controller.refreshConsumptionList();
@@ -56,7 +56,7 @@ ConsumptionController.prototype.refreshConsumptionList = function() {
 
     $.ajax({
         type : "GET",
-        url : "/api/consumptions/last24hours/akoss/" + venueController.getSelectedVenueName()
+        url : "/api/consumptions/last24hours/"+username+"/" + venueController.getSelectedVenueName()
     }).done(function(data) {
 
         controller.removeAll();
@@ -104,8 +104,8 @@ ConsumptionController.prototype.addConsumption = function(aggregatedConsumption)
 		+'			<tr>'
 		+'				<td>'
 		+'					<div class="manageConsumptionButtons" data-role="controlgroup" data-type="horizontal" data-mini="true">'
-		+'						<a href="#" data-role="button" data-icon="plus" data-theme="b" onClick="consumptionController.saveConsumption(\'akoss\', drinkController.getDrinkByType(\''+aggregatedConsumption.drinkType+'\'), venueController.getSelectedVenueName(), 0)">Increment</a>'
-		+'						<a href="#" data-role="button" data-icon="delete" data-theme="b" onClick="consumptionController.decrementConsumption(\'akoss\', drinkController.getDrinkByType(\''+aggregatedConsumption.drinkType+'\'), venueController.getSelectedVenueName())">Decrement</a>'
+		+'						<a href="#" data-role="button" data-icon="plus" data-theme="b" onClick="consumptionController.saveConsumption(drinkController.getDrinkByType(\''+aggregatedConsumption.drinkType+'\'), venueController.getSelectedVenueName(), 0)">Increment</a>'
+		+'						<a href="#" data-role="button" data-icon="delete" data-theme="b" onClick="consumptionController.decrementConsumption(drinkController.getDrinkByType(\''+aggregatedConsumption.drinkType+'\'), venueController.getSelectedVenueName())">Decrement</a>'
 		+'						<a href="#" data-role="button" data-icon="grid" data-theme="b">More</a>'
 		+'					</div>'
 		+'				</td>'
