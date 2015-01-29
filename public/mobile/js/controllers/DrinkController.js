@@ -132,7 +132,7 @@ DrinkController.prototype.addDrink = function(drink, index) {
 
     targetList.append(
           '<input type="radio" name="drink-choice" id="radio-choice-'+index+'" value="'+drink._id+'" '+(index == 0 ? 'checked="checked"' : '')+'>'
-        + '<label for="radio-choice-'+index+'">'+drink.name+' - '+ drink.type +'</label>');
+        + '<label for="radio-choice-'+index+'">' + drink.type +'</label>');
 
     $("input[type='radio']").checkboxradio().checkboxradio("refresh");
 };
