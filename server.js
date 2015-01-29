@@ -45,7 +45,7 @@ router.route('/drinks')
                 res.send(err);
             }
 
-            res.json({ message: 'Drink created!' });
+            res.json({ message: 'Drink created!', isSuccessful: true });
         });
 
     })

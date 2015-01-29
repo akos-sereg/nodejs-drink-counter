@@ -31,9 +31,9 @@ VenueController.prototype.loadVenueList = function() {
 };
 
 // Save Venue on server
-VenueController.prototype.saveVenue = function(name, address) {
+VenueController.prototype.saveVenue = function(venueForm) {
     var controller = this;
-    $.post('/api/venues', $('#addVenueForm').serialize())
+    $.post('/api/venues', venueForm.serialize())
         .done(function( data ) {
 
             if (data.isSuccessful == true) {

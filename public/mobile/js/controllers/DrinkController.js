@@ -1,4 +1,4 @@
-function DrinkController(popupName, ctrlDrinkList) {
+function DrinkController(popupName, ctrlDrinkList, drinkAddedPopup, drinkExistsPopup) {
     this.controls = [];
     this.popups = [];
 
@@ -7,6 +7,8 @@ function DrinkController(popupName, ctrlDrinkList) {
 
     // Popup screens used by this component
     this.popups["addDrinkPopup"] = popupName;
+    this.popups["drinkAddedPopup"] = drinkAddedPopup;
+    this.popups["drinkExistsPopup"] = drinkExistsPopup;
 
     this.drinks = [];
 
@@ -37,6 +39,31 @@ DrinkController.prototype.loadDrinkList = function() {
     }).fail(function(jqXHR, textStatus) {
 
     });
+}
+
+DrinkController.prototype.saveDrink = function(drinkForm) {
+
+    var controller = this;
+    var serializedData = drinkForm.serialize();
+
+    var type = drinkForm.find('input[name="type"]').val();
+    if (this.getDrinkByType(type) != null) {
+        $('#' + controller.popups["drinkExistsPopup"]).popup('open');
+        return;
+    }
+
+    $.post('/api/drinks', serializedData)
+        .done(function( data ) {
+
+            if (data.isSuccessful == true) {
+
+                controller.loadDrinkList();
+                $('#' + controller.popups["drinkAddedPopup"]).popup('open');
+            }
+            else {
+
+            }
+        });
 }
 
 // -----------------------------------------------------------------------------
