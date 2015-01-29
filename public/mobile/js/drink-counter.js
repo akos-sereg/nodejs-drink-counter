@@ -22,5 +22,5 @@ Date.prototype.ddmmyyyy = function() {
 var username = 'akoss';
 
 var venueController = new VenueController("venueList", "venueName", "venueAddress", "venueAddedPopup", "selectedVenueName");
-var drinkController = new DrinkController("addDrinkPopup", "drinkList", "drinkAddedPopup", "drinkExistsPopup");
+var drinkController = new DrinkController("addDrinkPopup", "drinkListBeer", "drinkListWine", "drinkListShot", "drinkListOther", "drinkAddedPopup", "drinkExistsPopup");
 var consumptionController = new ConsumptionController("consumptionList");

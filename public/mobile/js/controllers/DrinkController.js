@@ -1,9 +1,12 @@
-function DrinkController(popupName, ctrlDrinkList, drinkAddedPopup, drinkExistsPopup) {
+function DrinkController(popupName, ctrlDrinkListBeer, ctrlDrinkListWine, ctrlDrinkListShot, ctrlDrinkListOther, drinkAddedPopup, drinkExistsPopup) {
     this.controls = [];
     this.popups = [];
 
     // Labels used by this component
-    this.controls["drinkList"] = ctrlDrinkList;
+    this.controls["drinkListBeer"] = ctrlDrinkListBeer;
+    this.controls["drinkListWine"] = ctrlDrinkListWine;
+    this.controls["drinkListShot"] = ctrlDrinkListShot;
+    this.controls["drinkListOther"] = ctrlDrinkListOther;
 
     // Popup screens used by this component
     this.popups["addDrinkPopup"] = popupName;
@@ -102,12 +105,32 @@ DrinkController.prototype.getSelectedDrink = function() {
 
 // Remove drinks from drink list list
 DrinkController.prototype.removeDrinks = function() {
-    $('#' + this.controls["drinkList"]).html('');
+    $('#' + this.controls["drinkListBeer"]).html('');
+    $('#' + this.controls["drinkListWine"]).html('');
+    $('#' + this.controls["drinkListShot"]).html('');
+    $('#' + this.controls["drinkListOther"]).html('');
 };
 
 // Add Drink to drink list (model: drink.js)
 DrinkController.prototype.addDrink = function(drink, index) {
-    $('#' + this.controls["drinkList"]).append(
+
+    var targetList = null;
+    switch(drink.name) {
+        case 'Beer':
+            targetList = $('#' + this.controls["drinkListBeer"]);
+            break;
+        case 'Wine':
+            targetList = $('#' + this.controls["drinkListWine"]);
+            break;
+        case 'Shot':
+            targetList = $('#' + this.controls["drinkListShot"]);
+            break;
+        case 'Other':
+            targetList = $('#' + this.controls["drinkListOther"]);
+            break;
+    }
+
+    targetList.append(
           '<input type="radio" name="drink-choice" id="radio-choice-'+index+'" value="'+drink._id+'" '+(index == 0 ? 'checked="checked"' : '')+'>'
         + '<label for="radio-choice-'+index+'">'+drink.name+' - '+ drink.type +'</label>');
 

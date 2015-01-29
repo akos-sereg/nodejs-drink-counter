@@ -113,7 +113,7 @@
 				</form>
 				
 				<input id="saveVenueButton" type="button" onClick="venueController.saveVenue($('#addVenueForm'))" value="Save" />
-				
+
 				<br/>
 			</div>
 
@@ -162,9 +162,31 @@
 				<div data-role="content" data-theme="a" class="ui-corner-bottom ui-content">
 					<h3 class="ui-title">Drink to be added</h3>
 
-					<form id="drinkSelection" name="drinkSelection">
-						<fieldset id="drinkList" data-role="controlgroup"></fieldset>
-					</form>
+					<div data-role="collapsible-set">
+
+						<form id="drinkSelection" name="drinkSelection">
+							<div data-role="collapsible">
+								<h3>Beers</h3>
+								<fieldset id="drinkListBeer" data-role="controlgroup"></fieldset>
+							</div>
+
+							<div data-role="collapsible">
+								<h3>Wine</h3>
+								<fieldset id="drinkListWine" data-role="controlgroup"></fieldset>
+							</div>
+
+							<div data-role="collapsible">
+								<h3>Shots</h3>
+								<fieldset id="drinkListShot" data-role="controlgroup"></fieldset>
+							</div>
+
+							<div data-role="collapsible">
+								<h3>Others</h3>
+								<fieldset id="drinkListOther" data-role="controlgroup"></fieldset>
+							</div>
+						</form>
+
+					</div>
 
 					<a href="#" data-role="button" data-inline="true" data-theme="a" onClick="consumptionController.saveConsumption(drinkController.getSelectedDrink(), venueController.getSelectedVenueName(), 0)">OK</a>
 					<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="a">Cancel</a>
