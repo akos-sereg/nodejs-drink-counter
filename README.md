@@ -14,7 +14,7 @@ Create mongo account (I am using the username / password that is hardcoded in th
 ```
 $ mongo
 > use mydb
-> db.addUser("akoss", "dreher")
+> db.addUser("akoss", "dreher", roles: ["read"])
 ```
 
 Install packages
