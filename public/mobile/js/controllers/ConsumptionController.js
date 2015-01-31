@@ -26,7 +26,7 @@ ConsumptionController.prototype.saveConsumption = function(drink, venueName, pri
 
     $.post('/api/consumptions', postData)
          .done(function( data ) {
-            _drinkController.hideAddDrinkPopup();
+            _drinkController.view.hideAddDrinkPopup();
             _consumptionController.refreshConsumptionList();
         });
 }

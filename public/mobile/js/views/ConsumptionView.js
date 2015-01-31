@@ -1,5 +1,4 @@
-function ConsumptionView(consumptionList, consumptionPriceSum) {
-
+function ConsumptionView() {
 }
 
 // Remove all consumption items from screen
