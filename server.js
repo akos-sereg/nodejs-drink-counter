@@ -20,7 +20,7 @@ var port = process.env.PORT || 3000;        // set our port
 var router = express.Router();
 
 router.use(function(req, res, next) {
-    console.log('Request received: ' + req);
+    console.log(req.headers);
     next();
 });
 
