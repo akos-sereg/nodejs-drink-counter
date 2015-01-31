@@ -1,10 +1,10 @@
-function ConsumptionController(consumptionList, noDrinkSelected) {
+function ConsumptionController(consumptionList, consumptionPriceSum) {
     this.controls = [];
     this.popups = [];
     this.consumptions = [];
 
     this.controls["consumptionList"] = consumptionList;
-    this.popups["noDrinkSelected"] = noDrinkSelected;
+    this.controls["consumptionPriceSum"] = consumptionPriceSum;
 }
 
 // -----------------------------------------------------------------------------
@@ -91,7 +91,7 @@ ConsumptionController.prototype.refreshConsumptionList = function() {
             total += aggregatedConsumption[key].price;
         }
 
-        $('#consumptionPriceSum').html(total);
+        $('#'+controller.controls['consumptionPriceSum']).html(total);
 
     }).fail(function(jqXHR, textStatus) {
     });
