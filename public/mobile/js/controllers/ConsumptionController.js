@@ -35,7 +35,7 @@ ConsumptionController.prototype.saveConsumption = function(drink, venueName, pri
         });
 }
 
-// Decrement consumption items
+// Decrement selected consumption items
 ConsumptionController.prototype.decrementConsumption = function(drink, venueName) {
 
     var controller = this;
@@ -51,6 +51,7 @@ ConsumptionController.prototype.decrementConsumption = function(drink, venueName
     });
 }
 
+// Refresh consumption list for user and venue (last 24 hours) - Populates UI as well
 ConsumptionController.prototype.refreshConsumptionList = function() {
 
     var controller = this;
@@ -73,18 +74,32 @@ ConsumptionController.prototype.refreshConsumptionList = function() {
             }
             else {
                 aggregatedConsumption[data[i].drinkType].drinkCount++;
+
+                // Find price of one consumption item (will be aggregated - summed - later)
+                if (aggregatedConsumption[data[i].drinkType].price == 0 && data[i].price > 0) {
+                    aggregatedConsumption[data[i].drinkType].price = data[i].price;
+                }
             }
         }
 
         // Display consumption items
+        var total = 0;
         for (var key in aggregatedConsumption) {
+            aggregatedConsumption[key].price = aggregatedConsumption[key].drinkCount * aggregatedConsumption[key].price;
             controller.addConsumption(aggregatedConsumption[key]);
+
+            total += aggregatedConsumption[key].price;
         }
+
+        $('#consumptionPriceSum').html(total);
 
     }).fail(function(jqXHR, textStatus) {
     });
 }
 
+// Finds consumption price of provided drinkType if exists in loaded consumption list
+// This is useful when user is "Incrementing" a consumption item, as price can be "guessed" based on previously
+// added values.
 ConsumptionController.prototype.getDrinkPrice = function(drinkType) {
     if (this.consumptions == null) {
         return 0;
@@ -103,22 +118,27 @@ ConsumptionController.prototype.getDrinkPrice = function(drinkType) {
 // UI
 // -----------------------------------------------------------------------------
 
+// Remove all consumption items from UI
 ConsumptionController.prototype.removeAll = function() {
     $('#' + this.controls["consumptionList"]).html('');
 }
 
+// Add consumption item (aggregated) to display list
 ConsumptionController.prototype.addConsumption = function(aggregatedConsumption) {
 
     var html =
         '       <table width="100%">'
 		+'			<tr>'
-		+'				<td valign="center">'
+		+'				<td valign="center" width="10">'
 		+'					<span class="drinkCount">'+aggregatedConsumption.drinkCount+'</span>'
-		+'					<span class="drinkType">'+aggregatedConsumption.drinkType+'</span>'
+		+'				</td>'
+		+'				<td>'
+		+'					<span class="drinkType">'+aggregatedConsumption.drinkType+'</span><br/>'
+		+'					<span class="priceLabel">'+(aggregatedConsumption.price > 0 ? aggregatedConsumption.price : '')+'</span><br/>'
 		+'				</td>'
 		+'			</tr>'
 		+'			<tr>'
-		+'				<td>'
+		+'				<td colspan="2">'
 		+'					<div class="manageConsumptionButtons" data-role="controlgroup" data-type="horizontal" data-mini="true">'
 		+'						<a href="#" data-role="button" data-icon="plus" data-theme="b" onClick="consumptionController.saveConsumption(drinkController.getDrinkByType(\''+aggregatedConsumption.drinkType+'\'), venueController.getSelectedVenueName(), consumptionController.getDrinkPrice(\''+aggregatedConsumption.drinkType+'\'))">Increment</a>'
 		+'						<a href="#" data-role="button" data-icon="delete" data-theme="b" onClick="consumptionController.decrementConsumption(drinkController.getDrinkByType(\''+aggregatedConsumption.drinkType+'\'), venueController.getSelectedVenueName())">Decrement</a>'
