@@ -1,16 +1,14 @@
 function DrinkController(view) {
     this.view = view;
 
+    // Drink list available in mongo database
     this.drinks = [];
 
     // Initialize
     this.loadDrinkList();
 }
 
-// -----------------------------------------------------------------------------
-// AJAX Calls
-// -----------------------------------------------------------------------------
-
+// Load drinks from mongo database, populate drink selector
 DrinkController.prototype.loadDrinkList = function() {
 
     var _this = this;
@@ -32,6 +30,8 @@ DrinkController.prototype.loadDrinkList = function() {
     });
 }
 
+// Save drink to mongo database. Checks if loaded drink list contains drink identified by type (example: 'Dreher'),
+// it means that all drinks should have unique 'type'.
 DrinkController.prototype.saveDrink = function(drinkForm) {
 
     var _this = this;
@@ -57,6 +57,7 @@ DrinkController.prototype.saveDrink = function(drinkForm) {
         });
 }
 
+// Get drink from loaded drink list by mongo _id
 DrinkController.prototype.getDrinkById = function(drinkId) {
 
     for (var i=0; i!=this.drinks.length; i++) {
@@ -68,6 +69,7 @@ DrinkController.prototype.getDrinkById = function(drinkId) {
     return null;
 }
 
+// Get drink from loaded drink list by type (type example: 'Dreher')
 DrinkController.prototype.getDrinkByType = function(type) {
 
     for (var i=0; i!=this.drinks.length; i++) {
@@ -79,6 +81,7 @@ DrinkController.prototype.getDrinkByType = function(type) {
     return null;
 }
 
+// Get selected drink from Drink Selector (when adding consumption item)
 DrinkController.prototype.getSelectedDrink = function() {
 
     var selectedDrinkId =  this.view.getSelectedDrinkId();

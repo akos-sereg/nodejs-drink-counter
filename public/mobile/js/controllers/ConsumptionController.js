@@ -1,11 +1,9 @@
 function ConsumptionController(view) {
     this.view = view;
+
+    // Consumption list of current user at current venue
     this.consumptions = [];
 }
-
-// -----------------------------------------------------------------------------
-// AJAX Calls
-// -----------------------------------------------------------------------------
 
 // Increment consumption items
 ConsumptionController.prototype.saveConsumption = function(drink, venueName, price) {
