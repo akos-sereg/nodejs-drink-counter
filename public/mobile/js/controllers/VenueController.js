@@ -37,6 +37,7 @@ VenueController.prototype.saveVenue = function(venueForm) {
         .done(function( data ) {
 
             if (data.isSuccessful == true) {
+                controller.loadVenueList();
                 $('#' + controller.popups["venueAddedPopup"]).popup('open');
             }
         });
