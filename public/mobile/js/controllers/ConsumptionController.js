@@ -1,6 +1,7 @@
 function ConsumptionController(consumptionList, noDrinkSelected) {
     this.controls = [];
     this.popups = [];
+    this.consumptions = [];
 
     this.controls["consumptionList"] = consumptionList;
     this.popups["noDrinkSelected"] = noDrinkSelected;
@@ -59,6 +60,7 @@ ConsumptionController.prototype.refreshConsumptionList = function() {
         url : "/api/consumptions/last24hours/"+username+"/" + venueController.getSelectedVenueName()
     }).done(function(data) {
 
+        controller.consumptions = data;
         controller.removeAll();
 
         // Aggregate consumption items
@@ -83,6 +85,20 @@ ConsumptionController.prototype.refreshConsumptionList = function() {
     });
 }
 
+ConsumptionController.prototype.getDrinkPrice = function(drinkType) {
+    if (this.consumptions == null) {
+        return 0;
+    }
+
+    for (var i=0; i!=this.consumptions.length; i++) {
+        if (this.consumptions[i].drinkType == drinkType && this.consumptions[i].price > 0) {
+            return this.consumptions[i].price;
+        }
+    }
+
+    return 0;
+}
+
 // -----------------------------------------------------------------------------
 // UI
 // -----------------------------------------------------------------------------
@@ -104,7 +120,7 @@ ConsumptionController.prototype.addConsumption = function(aggregatedConsumption)
 		+'			<tr>'
 		+'				<td>'
 		+'					<div class="manageConsumptionButtons" data-role="controlgroup" data-type="horizontal" data-mini="true">'
-		+'						<a href="#" data-role="button" data-icon="plus" data-theme="b" onClick="consumptionController.saveConsumption(drinkController.getDrinkByType(\''+aggregatedConsumption.drinkType+'\'), venueController.getSelectedVenueName(), 0)">Increment</a>'
+		+'						<a href="#" data-role="button" data-icon="plus" data-theme="b" onClick="consumptionController.saveConsumption(drinkController.getDrinkByType(\''+aggregatedConsumption.drinkType+'\'), venueController.getSelectedVenueName(), consumptionController.getDrinkPrice(\''+aggregatedConsumption.drinkType+'\'))">Increment</a>'
 		+'						<a href="#" data-role="button" data-icon="delete" data-theme="b" onClick="consumptionController.decrementConsumption(drinkController.getDrinkByType(\''+aggregatedConsumption.drinkType+'\'), venueController.getSelectedVenueName())">Decrement</a>'
 		+'						<a href="#" data-role="button" data-icon="grid" data-theme="b">More</a>'
 		+'					</div>'

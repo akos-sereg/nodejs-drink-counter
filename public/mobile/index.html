@@ -171,7 +171,7 @@
 			</div>
 
 			<!-- *************************************************** -->
-			<!-- Add Drink POPUP                                     -->
+			<!-- Add Consumption POPUP                               -->
 			<!-- *************************************************** -->
 			<div data-role="popup" id="addDrinkPopup" data-overlay-theme="a" data-theme="c" style="max-width: 400px; width: 320px;" class="ui-corner-all">
 				<div data-role="header" data-theme="a" data-add-back-btn="false"  class="ui-corner-top">
@@ -184,6 +184,9 @@
 					<div data-role="collapsible-set">
 
 						<form id="drinkSelection" name="drinkSelection">
+
+							<input type="text" name="price" id="consumptionPrice" value="" placeholder="Price (optional)" />
+
 							<div data-role="collapsible">
 								<h3>Beers</h3>
 								<fieldset id="drinkListBeer" data-role="controlgroup"></fieldset>
@@ -207,7 +210,7 @@
 
 					</div>
 
-					<a href="#" data-role="button" data-inline="true" data-theme="a" onClick="consumptionController.saveConsumption(drinkController.getSelectedDrink(), venueController.getSelectedVenueName(), 0)">OK</a>
+					<a href="#" data-role="button" data-inline="true" data-theme="a" onClick="consumptionController.saveConsumption(drinkController.getSelectedDrink(), venueController.getSelectedVenueName(), $('#consumptionPrice').val())">OK</a>
 					<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="a">Cancel</a>
 				</div>
 
