@@ -14,7 +14,7 @@ Create mongo account (I am using the username / password that is hardcoded in th
 ```
 $ mongo
 > use mydb
-> db.addUser("akoss", "dreher", roles: ["read"])
+> db.addUser("akoss", "dreher")
 ```
 
 Install packages
@@ -25,6 +25,15 @@ nodejs-drink-counter$ npm install
 Start server
 ```
 nodejs-drink-counter$ node server.js
+```
+
+After that, your application should be available at http://127.0.0.1:3000/mobile
+
+Run tests
+```
+nodejs-drink-counter$ npm install jasmine-node -g
+nodejs-drink-counter$ npm install request
+nodejs-drink-counter$ jasmine-node spec/
 ```
 
 # Screenshots
