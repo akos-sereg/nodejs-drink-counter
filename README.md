@@ -35,6 +35,7 @@ nodejs-drink-counter$ npm install jasmine-node -g
 nodejs-drink-counter$ npm install frisby -g
 nodejs-drink-counter$ npm link frisby
 nodejs-drink-counter$ npm install request
+nodejs-drink-counter$ npm install async
 nodejs-drink-counter$ jasmine-node spec/
 ```
 
