@@ -32,6 +32,8 @@ After that, your application should be available at http://127.0.0.1:3000/mobile
 Run tests
 ```
 nodejs-drink-counter$ npm install jasmine-node -g
+nodejs-drink-counter$ npm install frisby -g
+nodejs-drink-counter$ npm link frisby
 nodejs-drink-counter$ npm install request
 nodejs-drink-counter$ jasmine-node spec/
 ```
