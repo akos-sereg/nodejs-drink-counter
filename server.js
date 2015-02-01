@@ -7,7 +7,7 @@ var Venue       = require('./app/models/venue');
 var Consumption = require('./app/models/consumption');
 
 var mongoose   = require('mongoose');
-mongoose.connect('mongodb://akoss:dreher@127.0.0.1:27017/mydb'); // connect to our database
+mongoose.connect('mongodb://akoss:dreher@127.0.0.1:27017/mydb');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
