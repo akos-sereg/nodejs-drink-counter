@@ -4,7 +4,9 @@ var frisby = require('frisby');                     // For REST API testing
 var Drink = require('../../app/models/drink');      // Drink - MongoDB Mapping
 
 // Connect to MongoDB, so that we can do DB Cleanup later
-mongoose.connect('mongodb://akoss:dreher@127.0.0.1:27017/mydb');
+if (mongoose.connection.readyState == 0) {
+    mongoose.connect('mongodb://akoss:dreher@127.0.0.1:27017/mydb');
+}
 
 // Check if Drink Collection can be retrieved
 frisby.create('Get Drinks call returns proper model structure')
@@ -47,16 +49,17 @@ async.parallel(calls, function(err, result) {
             .get('http://127.0.0.1:3000/api/drinks')
             .afterJSON(function(drinks) {
 
-                var jasmineTestDrinkFound = false;
+                var testDrink = null;
                 for (var i=0; i!=drinks.length; i++) {
                     if (drinks[i].type == 'JASMINE_TEST') {
-                        jasmineTestDrinkFound = true;
+                        testDrink = drinks[i];
                         break;
                     }
                 }
 
                 expect(drinks.length).toBeGreaterThan(0);       // We have drinks definde in MongoDB already
-                expect(jasmineTestDrinkFound).toMatch(true);    // We should be able to find JASMINE_TEST in Drink Collection
+                expect(testDrink != null).toMatch(true);        // We should be able to find JASMINE_TEST in Drink Collection
+                expect(testDrink.name).toMatch('Beer');
 
                 // Cleanup MongoDB
                 Drink.remove( { type: 'JASMINE_TEST' } ).exec();
