@@ -243,6 +243,28 @@ router.route('/consumptions/last24hours/:user/:venueName')
             });
         });
 
+// Get last 12 hours consumptions for user at venue
+router.route('/consumptions/last12hours/:user/:venueName')
+
+    .get(function(req, res) {
+
+            var yesterday = new Date();
+            yesterday.setTime(yesterday.getTime() - 43200000);
+
+            Consumption.find({
+                    user: req.params.user,
+                    venueName: req.params.venueName,
+                    insertedAt: { '$gte': yesterday }
+            },
+            function(err, consumptions) {
+                if (err) {
+                    res.send(err);
+                }
+
+                res.json(consumptions);
+            });
+        });
+
 // Decrement (remove last inserted consumption item)
 router.route('/consumptions/remove-last/:user/:venueName/:drinkType')
 

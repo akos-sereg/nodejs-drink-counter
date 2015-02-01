@@ -52,7 +52,7 @@ ConsumptionController.prototype.refreshConsumptionList = function() {
 
     $.ajax({
         type : "GET",
-        url : "/api/consumptions/last24hours/"+username+"/" + venueController.getSelectedVenueName()
+        url : "/api/consumptions/last12hours/"+username+"/" + venueController.getSelectedVenueName()
     }).done(function(data) {
 
         _this.consumptions = data;

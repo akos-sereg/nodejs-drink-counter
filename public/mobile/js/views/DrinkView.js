@@ -44,7 +44,6 @@ DrinkView.prototype.addDrink = function(drink, index) {
 // Show drink selector popup
 DrinkView.prototype.showAddDrinkPopup = function() {
     $('#addDrinkPopup').popup('open');
-    this.loadDrinkList();
 };
 
 // Hide drink selector popup
