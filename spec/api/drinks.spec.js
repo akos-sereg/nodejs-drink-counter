@@ -1,12 +1,7 @@
-var mongoose   = require('mongoose');               // For MongoDB Cleanup
+require('../../config.js');
 var async = require('async');                       // Async Module: used to wait until MongoDB Cleanup finished
 var frisby = require('frisby');                     // For REST API testing
 var Drink = require('../../app/models/drink');      // Drink - MongoDB Mapping
-
-// Connect to MongoDB, so that we can do DB Cleanup later
-if (mongoose.connection.readyState == 0) {
-    mongoose.connect('mongodb://akoss:dreher@127.0.0.1:27017/mydb');
-}
 
 // Check if Drink Collection can be retrieved
 frisby.create('Get Drinks call returns proper model structure')
