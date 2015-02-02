@@ -49,7 +49,7 @@ router.route('/drinks')
     })
 
     .get(function(req, res) {
-            Drink.find(function(err, drinks) {
+            Drink.find({}, {}, {sort: { type: 1}}, function(err, drinks) {
                 if (err)
                     res.send(err);
 
