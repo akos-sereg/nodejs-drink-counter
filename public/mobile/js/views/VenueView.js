@@ -10,7 +10,7 @@ VenueView.prototype.setVenueList = function(data) {
         for (var i=0; i!=data.length; i++)
         {
             html += '<li><a href="#listConsumption" onClick="venueController.venueSelected(\'' + data[i].name + '\');">'
-                + data[i].name + ' - ' + data[i].address + '</a></li>';
+                + data[i].name + ' - <span style="color: #777777;">' + data[i].address + '</span></a></li>';
         }
     }
 
