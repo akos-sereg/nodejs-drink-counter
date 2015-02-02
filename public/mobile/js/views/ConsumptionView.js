@@ -39,3 +39,7 @@ ConsumptionView.prototype.addConsumption = function(aggregatedConsumption) {
 ConsumptionView.prototype.setTotalPrice = function(totalPrice) {
     $('#consumptionPriceSum').html(totalPrice);
 }
+
+ConsumptionView.prototype.setLastItemAddedTime = function(millisecondsAgo) {
+    $('#lastItemAddedTime').html(millisecondsAgo == null ? 'N/A' : getElapsedTimeString(millisecondsAgo));
+}

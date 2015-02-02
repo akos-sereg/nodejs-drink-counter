@@ -20,7 +20,7 @@ ConsumptionController.prototype.saveConsumption = function(drink, venueName, pri
         + "&drinkType=" + drink.type
         + "&venueName=" + venueName
         + "&price="+price
-        + "&insertedAt="+new Date();
+        + "&insertedAt="+new Date().toGMTString();
 
     $.post('/api/consumptions', postData)
          .done(function( data ) {
@@ -60,6 +60,11 @@ ConsumptionController.prototype.refreshConsumptionList = function() {
 
         // Aggregate consumption items
         var aggregatedConsumption = [];
+
+        var agesBefore = new Date();
+        agesBefore.setDate(agesBefore.getDate() - (365 * 10));
+        var lastItemAddedTime = agesBefore.getTime();
+
         for (var i=0; i!=data.length; i++) {
 
             if (aggregatedConsumption[data[i].drinkType] == undefined) {
@@ -74,6 +79,11 @@ ConsumptionController.prototype.refreshConsumptionList = function() {
                     aggregatedConsumption[data[i].drinkType].price = data[i].price;
                 }
             }
+
+            // Find most recently added Consumption item
+            if (Date.parse(data[i].insertedAt) > lastItemAddedTime) {
+                lastItemAddedTime = Date.parse(data[i].insertedAt);
+            }
         }
 
         // Display consumption items
@@ -85,7 +95,13 @@ ConsumptionController.prototype.refreshConsumptionList = function() {
             total += aggregatedConsumption[key].price;
         }
 
+        // Make sure that we do not display '10 years ago' message by mistake
+        if (agesBefore.getTime() == lastItemAddedTime) {
+            lastItemAddedTime = null;
+        }
+
         _this.view.setTotalPrice(total);
+        _this.view.setLastItemAddedTime(lastItemAddedTime == null ? null : new Date().getTime() - lastItemAddedTime);
 
     }).fail(function(jqXHR, textStatus) {
     });

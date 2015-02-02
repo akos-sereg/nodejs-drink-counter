@@ -12,6 +12,7 @@
 		
 		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+		<script src="js/utils/date-utils.js"></script>
 		<script src="js/views/VenueView.js"></script>
 		<script src="js/views/DrinkView.js"></script>
 		<script src="js/views/ConsumptionView.js"></script>
@@ -159,15 +160,15 @@
 			</div>
 			<div data-role="content" data-theme="a">
 				Consumption in the last 24 hours here: <br/>
-				<b><span id="selectedVenueName"></span></b>
+				<b><span id="selectedVenueName"></span></b><br/>
+				Total Price: <span id="consumptionPriceSum" class="priceLabel"></span><br/>
+				Last item added <span id="lastItemAddedTime" class="priceLabel"></span><br/>
 
 				<br/>
 				<a href="#" data-role="button" data-inline="true" data-icon="home" data-rel="back" data-theme="a">Back</a>
 				<a href="#" data-role="button" data-inline="true" data-icon="plus" data-theme="a" onClick="drinkController.view.showAddDrinkPopup(); drinkController.loadDrinkList();">Add Drink</a>
 
 				<div id="consumptionList"></div>
-
-				Total Price: <span id="consumptionPriceSum" class="priceLabel"></span>
 			</div>
 
 			<!-- *************************************************** -->
