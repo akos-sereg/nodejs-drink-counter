@@ -1,0 +1,19 @@
+<!doctype html>
+<html ng-app>
+<head>
+    <title>AngularJS Client for Drink Counter</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="js/Controllers/VenueController.js"></script>
+</head>
+
+<body>
+<div ng-controller="VenueController">
+
+    <div id="biometrics" ng-repeat="venue in venues">
+        <div class="venueItem"><b>{{venue.name}}</b> - {{venue.address}}</div>
+    </div>
+
+</div>
+</body>
+</html>
