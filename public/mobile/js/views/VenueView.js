@@ -21,8 +21,8 @@ VenueView.prototype.setVenueList = function(data) {
 
 // Refresh "Add/Update Venue" screen
 VenueView.prototype.resetScreen = function() {
-    $('#venueName').val('');
-    $('#venueAddress').val('');
+    $("#addVenueForm input[name=name]").val('');
+    $("#addVenueForm input[name=address]").val('');
 };
 
 // Set "Selected Venue" label at the top of the screen

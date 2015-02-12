@@ -46,6 +46,11 @@ DrinkView.prototype.showAddDrinkPopup = function() {
     $('#addDrinkPopup').popup('open');
 };
 
+// Reset input controls
+DrinkView.prototype.resetScreen = function() {
+    $('#addDrinkPage input[name=type]').val('');
+}
+
 // Hide drink selector popup
 DrinkView.prototype.hideAddDrinkPopup = function() {
     this.removeDrinks();
